@@ -21,18 +21,7 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-  Color maleCardColour = inActiveCardColor;
-  Color femaleCardColour = inActiveCardColor;
-
-  void updateColour(Gender selectedGender) {
-    if (selectedGender == Gender.male) {
-      maleCardColour = activeCardColor;
-      femaleCardColour = inActiveCardColor;
-    } else if (selectedGender == Gender.female) {
-      maleCardColour = inActiveCardColor;
-      femaleCardColour = activeCardColor;
-    }
-  }
+  Gender? selectedGender;
 
   @override
   Widget build(BuildContext context) {
@@ -51,11 +40,13 @@ class _InputPageState extends State<InputPage> {
                   child: GestureDetector(
                     onTap: () {
                       setState(() {
-                        updateColour(Gender.male);
+                        selectedGender = Gender.male;
                       });
                     },
                     child: ReusableCard(
-                      colour: maleCardColour,
+                      colour: selectedGender == Gender.male
+                          ? activeCardColor
+                          : inActiveCardColor,
                       cardChild: GenderSelector(
                           icons: (FontAwesomeIcons.mars), title: 'Male'),
                     ),
@@ -65,11 +56,13 @@ class _InputPageState extends State<InputPage> {
                   child: GestureDetector(
                     onTap: () {
                       setState(() {
-                        updateColour(Gender.female);
+                        selectedGender = Gender.female;
                       });
                     },
                     child: ReusableCard(
-                      colour: femaleCardColour,
+                      colour: selectedGender == Gender.female
+                          ? activeCardColor
+                          : inActiveCardColor,
                       cardChild: GenderSelector(
                           icons: FontAwesomeIcons.venus, title: 'Female'),
                     ),
