@@ -1,15 +1,11 @@
 // ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:bmi/constant.dart';
 import 'package:bmi/resuable_card.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'gender_selector.dart';
-
-const bottomContainerHeight = 80.0;
-const activeCardColor = Color(0xFF1D1E33);
-const inActiveCardColor = Color(0xFF111328);
-const bottomContainerColor = Color(0xFFEB1555);
 
 enum Gender { male, female }
 
@@ -30,6 +26,7 @@ class _InputPageState extends State<InputPage> {
         title: Text('BMI CALCULATOR'),
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Expanded(
             child: Row(
@@ -37,42 +34,45 @@ class _InputPageState extends State<InputPage> {
               // ignore: prefer_const_literals_to_create_immutables
               children: [
                 Expanded(
-                  child: GestureDetector(
-                    onTap: () {
+                  child: ReusableCard(
+                    onPress: () {
                       setState(() {
                         selectedGender = Gender.male;
                       });
                     },
-                    child: ReusableCard(
-                      colour: selectedGender == Gender.male
-                          ? activeCardColor
-                          : inActiveCardColor,
-                      cardChild: GenderSelector(
-                          icons: (FontAwesomeIcons.mars), title: 'Male'),
-                    ),
+                    colour: selectedGender == Gender.male
+                        ? kActiveCardColor
+                        : kInActiveCardColor,
+                    cardChild: GenderSelector(
+                        icons: (FontAwesomeIcons.mars), title: 'Male'),
                   ),
                 ),
                 Expanded(
-                  child: GestureDetector(
-                    onTap: () {
+                  child: ReusableCard(
+                    onPress: () {
                       setState(() {
                         selectedGender = Gender.female;
                       });
                     },
-                    child: ReusableCard(
-                      colour: selectedGender == Gender.female
-                          ? activeCardColor
-                          : inActiveCardColor,
-                      cardChild: GenderSelector(
-                          icons: FontAwesomeIcons.venus, title: 'Female'),
-                    ),
+                    colour: selectedGender == Gender.female
+                        ? kActiveCardColor
+                        : kInActiveCardColor,
+                    cardChild: GenderSelector(
+                        icons: FontAwesomeIcons.venus, title: 'Female'),
                   ),
                 ),
               ],
             ),
           ),
           Expanded(
-            child: ReusableCard(colour: activeCardColor),
+            child: ReusableCard(
+              colour: kActiveCardColor,
+              cardChild: Column(children: [
+                Text(
+                  'HEIGHT',
+                )
+              ]),
+            ),
           ),
           Expanded(
             child: Row(
@@ -80,19 +80,19 @@ class _InputPageState extends State<InputPage> {
               // ignore: prefer_const_literals_to_create_immutables
               children: [
                 Expanded(
-                  child: ReusableCard(colour: activeCardColor),
+                  child: ReusableCard(colour: kActiveCardColor),
                 ),
                 Expanded(
-                  child: ReusableCard(colour: activeCardColor),
+                  child: ReusableCard(colour: kActiveCardColor),
                 ),
               ],
             ),
           ),
           Container(
-            color: bottomContainerColor,
+            color: kBottomContainerColor,
             margin: EdgeInsets.only(top: 10),
             width: double.infinity,
-            height: bottomContainerHeight,
+            height: kBottomContainerHeight,
           )
         ],
       ),

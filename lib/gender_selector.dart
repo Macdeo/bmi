@@ -1,3 +1,6 @@
+// ignore_for_file: prefer_const_constructors
+
+import 'package:bmi/constant.dart';
 import 'package:flutter/material.dart';
 
 class GenderSelector extends StatelessWidget {
@@ -15,7 +18,7 @@ class GenderSelector extends StatelessWidget {
       ),
       Text(
         title,
-        style: TextStyle(fontSize: 18, color: Color(0xFF8D8E98)),
+        style: labelTextStyle,
       )
     ]);
   }
