@@ -129,7 +129,24 @@ class _InputPageState extends State<InputPage> {
                             'WEIGHT',
                             style: klabelTextStyle,
                           ),
-                          Text(weigth.toString(), style: kNumberTextStyle)
+                          Text(
+                            weigth.toString(),
+                            style: kNumberTextStyle,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              RoundIconButton(
+                                icon: FontAwesomeIcons.minus,
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              RoundIconButton(
+                                icon: FontAwesomeIcons.plus,
+                              ),
+                            ],
+                          )
                         ]),
                   ),
                 ),
@@ -147,6 +164,25 @@ class _InputPageState extends State<InputPage> {
           )
         ],
       ),
+    );
+  }
+}
+
+class RoundIconButton extends StatelessWidget {
+  final IconData? icon;
+  const RoundIconButton({this.icon, Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return RawMaterialButton(
+      child: Icon(icon),
+      onPressed: () {},
+      constraints: BoxConstraints.tightFor(
+        width: 56,
+        height: 56,
+      ),
+      shape: CircleBorder(),
+      fillColor: Color(0xFF4C4F5E),
     );
   }
 }
