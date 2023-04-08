@@ -18,7 +18,7 @@ class GenderSelector extends StatelessWidget {
       ),
       Text(
         title,
-        style: labelTextStyle,
+        style: klabelTextStyle,
       )
     ]);
   }

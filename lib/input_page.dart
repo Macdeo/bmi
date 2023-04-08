@@ -18,6 +18,8 @@ class InputPage extends StatefulWidget {
 
 class _InputPageState extends State<InputPage> {
   Gender? selectedGender;
+  int height = 180;
+  int weigth = 60;
 
   @override
   Widget build(BuildContext context) {
@@ -67,20 +69,69 @@ class _InputPageState extends State<InputPage> {
           Expanded(
             child: ReusableCard(
               colour: kActiveCardColor,
-              cardChild: Column(children: [
-                Text(
-                  'HEIGHT',
-                )
-              ]),
+              cardChild: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'HEIGHT',
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.baseline,
+                      textBaseline: TextBaseline.alphabetic,
+                      children: [
+                        Text(
+                          height.toString(),
+                          style: kNumberTextStyle,
+                        ),
+                        Text(
+                          'cm',
+                          style: klabelTextStyle,
+                        )
+                      ],
+                    ),
+                    SliderTheme(
+                      data: SliderTheme.of(context).copyWith(
+                          activeTrackColor: Colors.white,
+                          inactiveTrackColor: Color(0xFF8D8E98),
+                          thumbColor: Color(0xFFEB1555),
+                          overlayColor: Color(0x29EB1555),
+                          thumbShape:
+                              RoundSliderThumbShape(enabledThumbRadius: 15.0),
+                          overlayShape:
+                              RoundSliderOverlayShape(overlayRadius: 30.0)),
+                      child: Slider(
+                        value: height.toDouble(),
+                        onChanged: (double newValue) {
+                          height = newValue.round();
+                          setState(() {
+                            height;
+                          });
+                        },
+                        min: 120.0,
+                        max: 220.0,
+                      ),
+                    )
+                  ]),
             ),
           ),
           Expanded(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              // ignore: prefer_const_literals_to_create_immutables
               children: [
                 Expanded(
-                  child: ReusableCard(colour: kActiveCardColor),
+                  child: ReusableCard(
+                    colour: kActiveCardColor,
+                    cardChild: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'WEIGHT',
+                            style: klabelTextStyle,
+                          ),
+                          Text(weigth.toString(), style: kNumberTextStyle)
+                        ]),
+                  ),
                 ),
                 Expanded(
                   child: ReusableCard(colour: kActiveCardColor),
