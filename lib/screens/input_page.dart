@@ -1,11 +1,14 @@
 // ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:bmi/calculator_brain.dart';
 import 'package:bmi/constant.dart';
-import 'package:bmi/resuable_card.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'gender_selector.dart';
+import '../components/bottom_button.dart';
+import '../components/resuable_card.dart';
+import '../components/gender_selector.dart';
+import 'results_page.dart';
 
 enum Gender { male, female }
 
@@ -20,7 +23,7 @@ class _InputPageState extends State<InputPage> {
   Gender? selectedGender;
   int height = 180;
   int weigth = 60;
-  int age = 19;
+  int age = 18;
 
   @override
   Widget build(BuildContext context) {
@@ -205,11 +208,21 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          Container(
-            color: kBottomContainerColor,
-            margin: EdgeInsets.only(top: 10),
-            width: double.infinity,
-            height: kBottomContainerHeight,
+          BottomButton(
+            onTap: () {
+              CalculatorBrain calc =
+                  CalculatorBrain(height: height, weight: weigth);
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ResultPage(
+                      bmiResult: calc.calculateBMI(),
+                      resultText: calc.getResult(),
+                      interpretation: calc.interpretation(),
+                    ),
+                  ));
+            },
+            buttonTitle: 'CALCULATE',
           )
         ],
       ),
